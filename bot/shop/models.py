@@ -18,12 +18,12 @@ class Products(models.Model):
 
 
 class Clientcarts(models.Model):
-    product_id = models.CharField(max_length=100)
+    product = models.ForeignKey(Products, on_delete=models.CASCADE)
     client = models.ForeignKey(Clients, on_delete=models.CASCADE)
 
 
 class Cartmeta(models.Model):
-    client_id = models.CharField(max_length=100, primary_key=True)
+    client = models.OneToOneField(Clients, on_delete=models.CASCADE, primary_key=True)
     patient_name = models.CharField(max_length=100, default="Mr/Mrs")
     deadline = models.DateField(default="2022-09-23")
     term_time = models.TimeField(default="10:10:10")
@@ -33,7 +33,7 @@ class Cartmeta(models.Model):
 
 class Orders(models.Model):
     order_id = models.BigAutoField(auto_created=True, primary_key=True)
-    client_id = models.CharField(max_length=100)
+    client_id = models.ForeignKey(Clients, on_delete=models.CASCADE, db_column='client_id')
     patient_name = models.CharField(max_length=100)
     deadline = models.DateField()
     term_time = models.TimeField()
@@ -42,6 +42,6 @@ class Orders(models.Model):
 
 
 class OrderedGoods(models.Model):
-    order_id = models.CharField(max_length=100)
-    product_id = models.CharField(max_length=100)
+    order_id = models.ForeignKey(Orders, on_delete=models.CASCADE, db_column='order_id')
+    product_id = models.OneToOneField(Products, on_delete=models.CASCADE, db_column='product_id')
     quantity = models.IntegerField()
