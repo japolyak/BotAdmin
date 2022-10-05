@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<!--suppress HtmlUnknownTarget -->
+<html>
+<head>
+    <title>Login</title>
+    <link type="text/css" href="{% static 'shop/css/login_style.css' %}" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+<form action="{% url 'shop:login' %}" method="post">
+{% csrf_token %}
+{% block content %}
+{% endblock %}
+
+    <button type="submit">Login</button>
+
+    <label>
+      <input type="checkbox" checked="checked" name="remember"> Remember me
+    </label>
+    </form>
+
+  </div>
+</form>
+
+<script>
+    function myFunction() {
+      var x = document.getElementById("id_password");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
+</script>
+
+</body>
+</html>

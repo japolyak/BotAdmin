@@ -18,12 +18,12 @@ class Products(models.Model):
 
 
 class Clientcarts(models.Model):
-    product = models.ForeignKey(Products, on_delete=models.CASCADE)
-    client = models.ForeignKey(Clients, on_delete=models.CASCADE)
+    product_id = models.ForeignKey(Products, on_delete=models.CASCADE, db_column='product_id')
+    client_id = models.ForeignKey(Clients, on_delete=models.CASCADE, db_column='client_id')
 
 
 class Cartmeta(models.Model):
-    client = models.OneToOneField(Clients, on_delete=models.CASCADE, primary_key=True)
+    client_id = models.OneToOneField(Clients, on_delete=models.CASCADE, primary_key=True, db_column='client_id')
     patient_name = models.CharField(max_length=100, default="Mr/Mrs")
     deadline = models.DateField(default="2022-09-23")
     term_time = models.TimeField(default="10:10:10")
