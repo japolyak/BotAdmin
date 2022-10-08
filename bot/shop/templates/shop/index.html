@@ -1,0 +1,18 @@
+{% extends 'shop/basic_layout.html' %}
+
+{% block content %}
+
+<ul>
+    {% for p in products %}
+    <li>
+        <h2>{{ p.product_name }}</h2>
+        <p>Category: {{ p.category }}</p>
+        <p>{{ p.price }}</p>
+        <p class="link-show-name"><a href="{{ p.get_absolute_url }}">Show name</a></p>
+
+        <hr>
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
